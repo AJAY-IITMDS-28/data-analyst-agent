@@ -2,7 +2,13 @@ from fastapi import FastAPI, File, UploadFile, Request
 from fastapi.responses import JSONResponse
 import os
 
+
+from fastapi.responses import PlainTextResponse
+
 app = FastAPI()
+@app.get("/api/")
+async def api_info():
+    return PlainTextResponse("Data Analyst Agent API: Use POST with questions.txt and files.")
 
 @app.post("/api/")
 async def analyze(request: Request, questions: UploadFile = File(...), files: list[UploadFile] = File(None)):
